@@ -31,19 +31,32 @@ async function validateUserId(req, res, next) {
   // DO YOUR MAGIC
 }
 
-function validateUser(req, res, next) {
-  console.log("logger middleware");
-
-  next();
+async function validateUser(req, res, next) {
+   try {
+    const { name } = req.body;
+    if (!name) {
+      res.status(400).json({
+        message: "missing required name field",
+      });
+    } else {
+      next();
+    }
+  } catch (error) {
+    // Handle any errors that occur within the try block
+    console.error("Error in validatePost:", error);
+    res.status(400).json({
+      message: "missing required text field",
+    });
+  }
   // DO YOUR MAGIC
 }
+
+
 
 function validatePost(req, res, next) {
-  console.log("logger middleware");
-
-  next();
-  // DO YOUR MAGIC
+ next()
 }
+
 
 module.exports = {
   logger,
