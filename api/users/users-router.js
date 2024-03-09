@@ -5,7 +5,7 @@ const {
   validatePost,
 } = require('../middleware/middleware')
 const Post = require('../posts/posts-model');
-const User = require('../users/users-model');
+const User = require('./users-model');
 
 const router = express.Router();
 
