@@ -9,20 +9,13 @@ const User = require('./users-model');
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
-  // RETURN AN ARRAY WITH ALL THE USERS
-try {
-  const users = await User.get();
-  res.status(200).json(users);
-
-} catch(error) {
-  console.error("Error retrieving users:", error)
-  res.status(500).json({message: "Internal service error"})
-}
-
-
-
-});
+router.get('/', (req, res, next) => {
+  User.get()
+  .then(users => {
+    res.json(users)
+  })
+  .catch(next)
+})
 
 router.get('/:id', validateUserId, (req, res) => {
   // RETURN THE USER OBJECT
