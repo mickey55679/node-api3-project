@@ -4,8 +4,6 @@ const {
   validateUser,
   validatePost,
 } = require('../middleware/middleware')
-// You will need `users-model.js` and `posts-model.js` both
-// The middleware functions also need to be required
 const Post = require('../posts/posts-model');
 const User = require('../users/users-model');
 
@@ -67,6 +65,14 @@ router.post('/:id/posts', validateUserId, validatePost, (req, res) => {
   console.log(req.text)
 });
 
-// do not forget to export the router
+
+router.use((err, req, res, next) => { //eslint-disable-line
+res.status(err.status || 500).json({
+  customMessage: 'something tragic inside posts route happend',
+  message: err.message,
+  stack: err.stack,
+})
+})
+
 
 module.exports = router;
