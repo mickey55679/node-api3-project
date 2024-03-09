@@ -2,13 +2,11 @@ const User = require('../users/users-model');
 
 
 function logger(req, res, next) {
-  
   const timestamp = new Date().toLocaleString();
   const method = req.method;
   const url = req.originalUrl
   console.log(`[${timestamp}] ${method} to ${url}`);
   next()
-  // DO YOUR MAGIC
 }
 
 async function validateUserId(req, res, next) {
@@ -46,6 +44,15 @@ function validateUser(req, res, next) {
 
 
 function validatePost(req, res, next) {
+
+const { text } = req.body
+if (!text || !text.trim()){
+  res.status(400).json({
+    message: 'missing required text field',
+  })
+} else {
+  req.text = text.trim()
+}
   next()
 }
 
