@@ -24,54 +24,29 @@ async function validateUserId(req, res, next) {
     }
   } catch(err) {
      res.status(500).json({
-       message: "Problem finding user",
+       message: "problem finding user",
      });
 
   }
   // DO YOUR MAGIC
 }
 
-async function validateUser(req, res, next) {
-   try {
-    const { name } = req.body;
+function validateUser(req, res, next) {
+    const { name } = req.body
     if (!name || !name.trim()) {
       res.status(400).json({
         message: "missing required name field",
-      });
+      })
     } else {
       req.name = name.trim()
       next();
-    }
-  } catch (error) {
-    // Handle any errors that occur within the try block
-    console.error("Error in validatePost:", error);
-    res.status(400).json({
-      message: "missing required name field",
-    });
   }
-  // DO YOUR MAGIC
 }
 
 
 
-async function validatePost(req, res, next) {
-  try {
-    const { name } = req.body;
-    if(!name) {
-      res.status(400).json({
-        message: "missing required test field"
-      })
-    } else {
-      // req.name = name.trim()
-      next()
-    }
-
-  } catch(err) {
-    res.status(500).json({
-      message: "issue validating post"
-    })
-
-  }
+function validatePost(req, res, next) {
+  next()
 }
 
 
