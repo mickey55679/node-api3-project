@@ -15,16 +15,15 @@ router.get('/', (req, res, next) => {
     res.json(users)
   })
   .catch(next)
-})
+});
 
 router.get('/:id', validateUserId, (req, res) => {
   res.json(req.user)
 });
 
 router.post('/', validateUser, (req, res, next) => {
- User.insert({ name: req.body.name })
+ User.insert({ name: req.name })
  .then(newUser => {
-  
   res.status(201).json(newUser)
  })
  .catch(next) 
@@ -35,7 +34,7 @@ router.put('/:id', validateUserId, validateUser, (req, res) => {
   // this needs a middleware to verify user id
   // and another middleware to check that the request body is valid
   console.log(req.user)
-  console.log(req.name);
+  console.log(req.name)
 });
 
 router.delete('/:id', validateUserId,  (req, res) => {
