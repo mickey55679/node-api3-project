@@ -23,10 +23,8 @@ async function validateUserId(req, res, next) {
   } catch(err) {
      res.status(500).json({
        message: "problem finding user",
-     });
-
+     })
   }
-  // DO YOUR MAGIC
 }
 
 function validateUser(req, res, next) {
@@ -37,23 +35,22 @@ function validateUser(req, res, next) {
       })
     } else {
       req.name = name.trim()
-      next();
+      next()
   }
 }
 
 
 
 function validatePost(req, res, next) {
-
 const { text } = req.body
-if (!text || !text.trim()){
+if (!text || !text.trim()) {
   res.status(400).json({
     message: 'missing required text field',
   })
 } else {
   req.text = text.trim()
-}
   next()
+}
 }
 
 
