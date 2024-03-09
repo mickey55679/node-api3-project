@@ -18,8 +18,6 @@ router.get('/', (req, res, next) => {
 })
 
 router.get('/:id', validateUserId, (req, res) => {
-  // RETURN THE USER OBJECT
-  // this needs a middleware to verify user id
   console.log(req.user)
   res.json(req.user)
 });
